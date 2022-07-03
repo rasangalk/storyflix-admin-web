@@ -29,7 +29,7 @@ function Albums() {
         <Sidebar />
       </div>
       <div className="col-span-11 mx-auto">
-        <button className="mt-[6rem] ml-[55rem] bg-[#003CFF] hover:bg-[#073ADF] font-semibold text-white py-3 px-10 rounded-lg">
+        <button className="mt-[6rem] ml-[55rem] font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
           Add New
         </button>
         <div className="grid grid-cols-12 grid-rows-6 bg-white w-[65rem] h-[38rem] mt-[2rem] rounded-2xl drop-shadow-2xl">
