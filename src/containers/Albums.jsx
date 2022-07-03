@@ -3,11 +3,14 @@ import Sidebar from "../components/Sidebar";
 import { db } from "../firebase.config";
 import { collection, getDocs } from "firebase/firestore";
 import { async } from "@firebase/util";
+import { useNavigate } from "react-router-dom";
 
 function Albums() {
   const albumCollectionRef = collection(db, "Albums");
 
   const [albums, setAlbums] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getAlbums = async () => {
@@ -29,7 +32,12 @@ function Albums() {
         <Sidebar />
       </div>
       <div className="col-span-11 mx-auto">
-        <button className="mt-[6rem] ml-[55rem] font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+        <button
+          className="mt-[6rem] ml-[55rem] font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          onClick={() => {
+            navigate("/album/create");
+          }}
+        >
           Add New
         </button>
         <div className="grid grid-cols-12 grid-rows-6 bg-white w-[65rem] h-[38rem] mt-[2rem] rounded-2xl drop-shadow-2xl">
