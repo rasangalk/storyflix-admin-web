@@ -59,12 +59,17 @@ function Albums() {
                     </thead>
                     <tbody>
                       {albums.map((album) => {
+                        let date = album.CreatedDate.toString();
+                        let yy = date.slice(0, 2);
+                        let mm = date.slice(2, 4);
+                        let dd = date.slice(4, 6);
+                        date = yy + "/" + mm + "/" + dd;
                         return (
                           <tr className="even:bg-white odd:bg-slate-100 cursor-pointer">
                             <td className=" py-2 px-2">{album.AlbumID}</td>
                             <td className=" py-2 px-2">{album.AlbumName}</td>
                             <td className=" py-2 px-2">{album.AuthorName}</td>
-                            <td className=" py-2 px-2">{album.CreatedDate}</td>
+                            <td className=" py-2 px-2">{date}</td>
                           </tr>
                         );
                       })}
