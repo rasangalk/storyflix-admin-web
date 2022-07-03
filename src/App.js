@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import Test from "./components/Test";
+import Albums from "./containers/Albums";
 
 function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Test />} />
+        <Route path="/" element={<Albums />} />
       </Routes>
     </div>
   );
