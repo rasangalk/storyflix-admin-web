@@ -39,7 +39,7 @@ function AddAlbum() {
           <div className="col-start-2 col-span-10 grid grid-cols-12 border-2 border-[#E2E8F0] rounded-lg h-[36rem]">
             <div className="col-start-2 col-span-4 text-center">
               <div
-                className="w-[200px] h-[250px] bg-slate-200 mx-auto rounded-lg mt-10 drop-shadow-md flex items-center justify-center"
+                className="w-[320px] h-[400px] bg-slate-200 mx-auto rounded-lg mt-10 drop-shadow-md flex items-center justify-center"
                 style={{
                   background: imagePreview
                     ? `url('${imagePreview}')no-repeat center/cover`
