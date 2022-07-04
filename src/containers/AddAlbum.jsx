@@ -172,7 +172,7 @@ function AddAlbum() {
                   add
                 </button>
               </div>
-              <div className="h-24 w-96 bg-slate-200 rounded-lg mt-2 mb-4 overflow-y-auto">
+              <div className="h-36 w-96 bg-slate-200 rounded-lg mt-2 mb-4 overflow-y-auto">
                 {searchTags.map((object, index) => (
                   <div className="flex flex-row justify-between mt-2">
                     <h2 className="ml-4">{object}</h2>
@@ -187,6 +187,9 @@ function AddAlbum() {
                   </div>
                 ))}
               </div>
+              <button className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                Add New
+              </button>
             </div>
           </div>
         </div>
