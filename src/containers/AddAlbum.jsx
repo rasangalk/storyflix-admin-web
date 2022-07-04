@@ -1,15 +1,35 @@
 import { toBeInTheDocument } from "@testing-library/jest-dom/dist/matchers";
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../components/Sidebar";
 import back from "../images/back.svg";
 import bin from "../images/bin.svg";
+import { storage } from "../firebase.config";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../firebase.config";
+import { useNavigate } from "react-router-dom";
 
 function AddAlbum() {
+  // firestore collection reference
+  const albumCollectionRef = collection(db, "Albums");
+
+  const navigate = useNavigate();
+
+  const [selected, setSelected] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
-  const [error, setError] = useState(false);
 
   const handleImageChange = (e) => {
     const selected = e.target.files[0];
+    setSelected(selected);
     const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg"];
     if (selected && ALLOWED_TYPES.includes(selected.type)) {
       let reader = new FileReader();
@@ -18,12 +38,55 @@ function AddAlbum() {
       };
       reader.readAsDataURL(selected);
     } else {
-      alert("file not supported!");
+      errNotify();
     }
   };
 
   const [searchTags, setSearchTags] = useState([]);
   const [value, setValue] = useState(null);
+
+  const [albumName, setAlbumName] = useState("");
+  const [authorName, setAuthorName] = useState("");
+  const [category, setCategory] = useState("");
+  const [episodeCount, setEpisodeCount] = useState("");
+  const [previewText, setPreviewText] = useState("");
+  const [tagline, setTagline] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
+
+  //=================================== Albem Id Generate ===================================
+  var today = new Date();
+  // returns year as YY
+  var year = today.getFullYear().toString();
+  // returns month
+  var month = today.getMonth().toString();
+  if (month.length == 1) {
+    month = "0" + month;
+  }
+  // returns day
+  var day = today.getDate().toString();
+  if (day.length == 1) {
+    day = "0" + day;
+  }
+  // returns hours
+  var hours = today.getHours().toString();
+  if (hours.length == 1) {
+    hours = "0" + hours;
+  }
+  // returns minutes
+  var minutes = today.getMinutes().toString();
+  if (minutes.length == 1) {
+    minutes = "0" + minutes;
+  }
+  // returns seconds
+  var seconds = today.getSeconds().toString();
+  if (seconds.length == 1) {
+    seconds = "0" + seconds;
+  }
+  // returns formatted date
+  var formatedDate =
+    year.substr(2, 3) + month + day + "." + hours + minutes + seconds;
+  const AlbumID = parseFloat(formatedDate);
+  const CreateDate = Number(year.substr(2, 3) + month + day);
 
   const handleAddSearchTag = () => {
     setSearchTags([...searchTags, value]);
@@ -37,16 +100,71 @@ function AddAlbum() {
     setSearchTags(list);
   };
 
+  const handleAddNew = () => {
+    const imageRef = ref(storage, `BooksImages/${selected.name}`);
+    uploadBytes(imageRef, selected).then(() => {
+      getDownloadURL(imageRef).then((url) => {
+        SendData(url);
+      });
+    });
+  };
+
+  const SendData = async (url) => {
+    await addDoc(albumCollectionRef, {
+      AlbumID: AlbumID,
+      AuthorName: authorName,
+      CoverURL: url,
+      AlbumName: albumName,
+      CategoryID: parseInt(category),
+      EpiCount: parseInt(episodeCount),
+      PreviewText: previewText,
+      SearchTags: searchTags,
+      Tagline: tagline,
+      CreatedDate: CreateDate,
+      ViewCount: 0,
+    }).then(navigate("/"));
+  };
+
+  const notify = () =>
+    toast.success("🥳 Album Saving...", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  const errNotify = () =>
+    toast.error("File format not supported!", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
   return (
     <div className="bg-[#F9F9F9] w-screen h-screen grid grid-cols-12">
       <div className="">
         <Sidebar />
       </div>
       <div className="col-span-11 mx-auto">
+        <ToastContainer />
         <div className="grid grid-cols-12 grid-rows-6 bg-white w-[65rem] h-[48rem] mt-[2rem] rounded-2xl drop-shadow-2xl">
           <div className="col-span-12">
             <div className="flex flex-row items-end ml-8">
-              <img src={back} alt="back" />
+              <img
+                className="cursor-pointer"
+                src={back}
+                alt="back"
+                onClick={() => {
+                  navigate("/");
+                }}
+              />
               <h2 className="pb-[2px] font-semibold text-4xl ml-6 mt-8">
                 Albums
               </h2>
@@ -97,7 +215,7 @@ function AddAlbum() {
               <input
                 type="text"
                 // defaultValue={students.group.students.leader.email}
-                // onChange={(e) => setLeaderEmail(e.target.value)}
+                onChange={(e) => setAlbumName(e.target.value)}
                 className="bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md text-base focus:ring-1 px-3 py-1"
               />
               <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-12 ">
@@ -106,7 +224,7 @@ function AddAlbum() {
               <input
                 type="text"
                 // defaultValue={students.group.students.leader.email}
-                // onChange={(e) => setLeaderEmail(e.target.value)}
+                onChange={(e) => setAuthorName(e.target.value)}
                 className="bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md text-base focus:ring-1 px-3 py-1"
               />
               <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-12 ">
@@ -114,19 +232,14 @@ function AddAlbum() {
               </p>
               <select
                 // value={firstMemberFormData.specialization}
-                // onChange={(e) =>
-                //   setFirstMemberFormData({
-                //     ...firstMemberFormData,
-                //     specialization: e.target.value,
-                //   })
-                // }
+                onChange={(e) => setCategory(e.target.value)}
                 className="mt-1 px-3 py-1 bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md focus:ring-1"
               >
                 <option value="" disabled selected hidden></option>
-                <option value="novels">Novels</option>
-                <option value="short stories">Short Stories</option>
-                <option value="translation">Translation</option>
-                <option value="other">Other</option>
+                <option value="0">Novels</option>
+                <option value="1">Short Stories</option>
+                <option value="2">Translation</option>
+                <option value="3">Other</option>
               </select>
               <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-14 ">
                 Episode Count:
@@ -134,7 +247,7 @@ function AddAlbum() {
               <input
                 type="number"
                 // defaultValue={students.group.students.leader.email}
-                // onChange={(e) => setLeaderEmail(e.target.value)}
+                onChange={(e) => setEpisodeCount(e.target.value)}
                 className="bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md text-base focus:ring-1 px-3 py-1"
               />
             </div>
@@ -143,14 +256,14 @@ function AddAlbum() {
                 Preview Text:
               </p>
               <textarea
-                // onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setPreviewText(e.target.value)}
                 className=" border-2 w-[48rem] rounded-md h-20 py-1 px-2 resize-none mt-1 outline-0 focus:border-sky-500 focus:ring-sky-500 "
               />
               <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-9 ">
                 Tagline:
               </p>
               <textarea
-                // onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setTagline(e.target.value)}
                 className=" border-2 w-[48rem] rounded-md h-20 py-1 px-2 resize-none mt-1 outline-0 focus:border-sky-500 focus:ring-sky-500 "
               />
               <div className="flex flex-row items-end gap-4 mt-[-1rem]">
@@ -187,7 +300,13 @@ function AddAlbum() {
                   </div>
                 ))}
               </div>
-              <button className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+              <button
+                className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                onClick={() => {
+                  notify();
+                  handleAddNew();
+                }}
+              >
                 Add New
               </button>
             </div>
