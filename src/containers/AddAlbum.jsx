@@ -2,6 +2,7 @@ import { toBeInTheDocument } from "@testing-library/jest-dom/dist/matchers";
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import back from "../images/back.svg";
+import bin from "../images/bin.svg";
 
 function AddAlbum() {
   const [imagePreview, setImagePreview] = useState(null);
@@ -171,16 +172,17 @@ function AddAlbum() {
                   add
                 </button>
               </div>
-              <div className="h-24 w-96 bg-slate-200 rounded-lg mt-2 mb-4">
+              <div className="h-24 w-96 bg-slate-200 rounded-lg mt-2 mb-4 overflow-y-auto">
                 {searchTags.map((object, index) => (
-                  <div className="flex flex-row">
-                    <h2>{object}</h2>
+                  <div className="flex flex-row justify-between mt-2">
+                    <h2 className="ml-4">{object}</h2>
                     <button
+                      className="mr-4 mb-4"
                       onClick={() => {
                         handleDelete(index);
                       }}
                     >
-                      delete
+                      <img src={bin} alt="bin" />
                     </button>
                   </div>
                 ))}
