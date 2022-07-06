@@ -1,4 +1,3 @@
-import { toBeInTheDocument } from "@testing-library/jest-dom/dist/matchers";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,14 +6,7 @@ import back from "../images/back.svg";
 import bin from "../images/bin.svg";
 import { storage } from "../firebase.config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-  updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate } from "react-router-dom";
 
@@ -51,7 +43,6 @@ function AddAlbum() {
   const [episodeCount, setEpisodeCount] = useState("");
   const [previewText, setPreviewText] = useState("");
   const [tagline, setTagline] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
 
   //=================================== Albem Id Generate ===================================
   var today = new Date();
@@ -100,33 +91,8 @@ function AddAlbum() {
     setSearchTags(list);
   };
 
-  const handleAddNew = () => {
-    const imageRef = ref(storage, `BooksImages/${selected.name}`);
-    uploadBytes(imageRef, selected).then(() => {
-      getDownloadURL(imageRef).then((url) => {
-        SendData(url);
-      });
-    });
-  };
-
-  const SendData = async (url) => {
-    await addDoc(albumCollectionRef, {
-      AlbumID: AlbumID,
-      AuthorName: authorName,
-      CoverURL: url,
-      AlbumName: albumName,
-      CategoryID: parseInt(category),
-      EpiCount: parseInt(episodeCount),
-      PreviewText: previewText,
-      SearchTags: searchTags,
-      Tagline: tagline,
-      CreatedDate: CreateDate,
-      ViewCount: 0,
-    }).then(navigate("/"));
-  };
-
-  const notify = () =>
-    toast.success("🥳 Album Saving...", {
+  const ErrMsg = (errMsg) => {
+    toast.error(errMsg, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -135,6 +101,69 @@ function AddAlbum() {
       draggable: true,
       progress: undefined,
     });
+  };
+
+  const handleAddNew = () => {
+    const imageRef = ref(storage, `BooksImages/${selected.name}`);
+    if (selected == "") {
+      ErrMsg("Cover image must be added!");
+    } else {
+      uploadBytes(imageRef, selected).then(() => {
+        getDownloadURL(imageRef).then((url) => {
+          SendData(url);
+        });
+      });
+    }
+  };
+
+  const notify = () =>
+    toast.success("🤩 Album Created....", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
+  const SendData = async (url) => {
+    if (AlbumID == 0) {
+      ErrMsg("Album ID Error!");
+    } else if (authorName == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (url == "") {
+      ErrMsg("Cover URL Error!");
+    } else if (albumName == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (category == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (episodeCount == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (previewText == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (searchTags == "") {
+      ErrMsg("Search Tags must be added!");
+    } else if (tagline == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (CreateDate == "") {
+      ErrMsg("Date Error!");
+    } else {
+      await addDoc(albumCollectionRef, {
+        AlbumID: AlbumID,
+        AuthorName: authorName,
+        CoverURL: url,
+        AlbumName: albumName,
+        CategoryID: parseInt(category),
+        EpiCount: parseInt(episodeCount),
+        PreviewText: previewText,
+        SearchTags: searchTags,
+        Tagline: tagline,
+        CreatedDate: CreateDate,
+        ViewCount: 0,
+      }).then(navigate("/"));
+    }
+  };
 
   const errNotify = () =>
     toast.error("File format not supported!", {
@@ -201,6 +230,7 @@ function AddAlbum() {
                 <button
                   onClick={() => {
                     setImagePreview(null);
+                    setSelected("");
                   }}
                   className="mt-4 inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
@@ -209,8 +239,8 @@ function AddAlbum() {
               )}
             </div>
             <div className="col-start-7 col-span-5">
-              <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-10 ">
-                Album Name:
+              <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-10 ">
+                Album Name
               </p>
               <input
                 type="text"
@@ -218,20 +248,18 @@ function AddAlbum() {
                 onChange={(e) => setAlbumName(e.target.value)}
                 className="bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md text-base focus:ring-1 px-3 py-1"
               />
-              <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-12 ">
-                Author Name:
+              <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-12 ">
+                Author Name
               </p>
               <input
                 type="text"
-                // defaultValue={students.group.students.leader.email}
                 onChange={(e) => setAuthorName(e.target.value)}
                 className="bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md text-base focus:ring-1 px-3 py-1"
               />
-              <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-12 ">
-                Category:
+              <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-12 ">
+                Category
               </p>
               <select
-                // value={firstMemberFormData.specialization}
                 onChange={(e) => setCategory(e.target.value)}
                 className="mt-1 px-3 py-1 bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md focus:ring-1"
               >
@@ -241,26 +269,25 @@ function AddAlbum() {
                 <option value="2">Translation</option>
                 <option value="3">Other</option>
               </select>
-              <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-14 ">
-                Episode Count:
+              <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-14 ">
+                Episode Count
               </p>
               <input
                 type="number"
-                // defaultValue={students.group.students.leader.email}
                 onChange={(e) => setEpisodeCount(e.target.value)}
                 className="bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md text-base focus:ring-1 px-3 py-1"
               />
             </div>
             <div className="col-start-2 col-span-10">
-              <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-9 ">
-                Preview Text:
+              <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-9 ">
+                Preview Text
               </p>
               <textarea
                 onChange={(e) => setPreviewText(e.target.value)}
                 className=" border-2 w-[48rem] rounded-md h-20 py-1 px-2 resize-none mt-1 outline-0 focus:border-sky-500 focus:ring-sky-500 "
               />
-              <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-9 ">
-                Tagline:
+              <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-9 ">
+                Tagline
               </p>
               <textarea
                 onChange={(e) => setTagline(e.target.value)}
@@ -268,8 +295,8 @@ function AddAlbum() {
               />
               <div className="flex flex-row items-end gap-4 mt-[-1rem]">
                 <div>
-                  <p className="capitalize text-base text-slate-700 text-sm mb-1 mt-14 ">
-                    Search Tags:
+                  <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-14 ">
+                    Search Tags
                   </p>
                   <input
                     value={value}
@@ -303,7 +330,6 @@ function AddAlbum() {
               <button
                 className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 onClick={() => {
-                  notify();
                   handleAddNew();
                 }}
               >

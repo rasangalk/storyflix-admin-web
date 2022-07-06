@@ -24,7 +24,7 @@ function Albums() {
     };
 
     getAlbums();
-  });
+  }, []);
 
   return (
     <div className="bg-[#F9F9F9] w-screen h-screen grid grid-cols-12">
@@ -73,7 +73,12 @@ function Albums() {
                         let dd = date.slice(4, 6);
                         date = yy + "/" + mm + "/" + dd;
                         return (
-                          <tr className="even:bg-white odd:bg-slate-100 cursor-pointer">
+                          <tr
+                            className="even:bg-white odd:bg-slate-100 cursor-pointer"
+                            onClick={() => {
+                              navigate("/album/" + album.id);
+                            }}
+                          >
                             <td className=" py-2 px-2">{album.AlbumID}</td>
                             <td className=" py-2 px-2">{album.AlbumName}</td>
                             <td className=" py-2 px-2">{album.AuthorName}</td>
