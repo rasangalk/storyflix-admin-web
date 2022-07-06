@@ -157,7 +157,7 @@ function AlbumView() {
     const albumDoc = doc(db, "Albums", albumId);
 
     if (selected == "" && imagePreview == null) {
-      console.log("something wrong with the image upload functions");
+      ErrMsg("Please choose a cover image");
     } else if (selected == "" && imagePreview != "") {
       /* this section handles if the user does not modify the image but other text fields*/
       const newFields = {
@@ -171,7 +171,7 @@ function AlbumView() {
         SearchTags: newSearchTags,
         Tagline: newTagline,
       };
-      await updateDoc(albumDoc, newFields);
+      await updateDoc(albumDoc, newFields).then(navigate("/"));
     } else if (selected != "" && imagePreview == null) {
       console.log("Something wrong with the image preview");
     } else {
@@ -193,7 +193,7 @@ function AlbumView() {
               SearchTags: newSearchTags,
               Tagline: newTagline,
             };
-            updateDoc(albumDoc, newFields);
+            updateDoc(albumDoc, newFields).then(navigate("/"));
           });
         });
       }
@@ -202,7 +202,7 @@ function AlbumView() {
 
   const deleteAlbum = async () => {
     const albumDoc = doc(db, "Albums", albumId);
-    deleteDoc(albumDoc);
+    deleteDoc(albumDoc).then(navigate("/"));
   };
 
   console.log(album);
@@ -375,7 +375,6 @@ function AlbumView() {
                         label: "Yes",
                         onClick: () => {
                           deleteAlbum();
-                          navigate("/");
                         },
                       },
                       {
@@ -407,7 +406,6 @@ function AlbumView() {
                             searchTags,
                             CreateDate
                           );
-                          navigate("/");
                         },
                       },
                       {
