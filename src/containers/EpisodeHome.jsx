@@ -57,7 +57,7 @@ function EpisodeHome() {
                           <tr
                             className="even:bg-white odd:bg-slate-100 cursor-pointer"
                             onClick={() => {
-                              navigate("/episodes/" + album.id);
+                              navigate("/episodes/" + album.AlbumID);
                             }}
                           >
                             <td className=" py-2 px-2">{album.AlbumName}</td>
