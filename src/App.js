@@ -4,6 +4,7 @@ import Albums from "./containers/Albums";
 import AlbumView from "./containers/AlbumView";
 import EpisodeHome from "./containers/EpisodeHome";
 import Episodes from "./containers/Episodes";
+import EpisodeView from "./containers/EpisodeView";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/album/:albumId" element={<AlbumView />} />
         <Route path="/episodes" element={<EpisodeHome />} />
         <Route path="/episodes/:albumId" element={<Episodes />} />
+        <Route path="/episode/:epiID" element={<EpisodeView />} />
       </Routes>
     </div>
   );

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "react-toastify/dist/ReactToastify.css";
 import ReactLoading from "react-loading";
 import { useNavigate, useParams } from "react-router-dom";
 import { db } from "../firebase.config";
