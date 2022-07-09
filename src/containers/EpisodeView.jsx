@@ -52,7 +52,7 @@ function EpisodeView() {
               </h2>
             </div>
           </div>
-          {albumName ? (
+          {title ? (
             <div className="col-start-2 col-span-10 grid grid-cols-12 border-2 border-[#E2E8F0] rounded-lg h-[36rem] overflow-y-auto">
               <div className="col-start-1 col-span-12 ml-12">
                 <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-9 ">
@@ -73,7 +73,7 @@ function EpisodeView() {
                   className="border-2 w-[48rem] rounded-md h-[20rem] py-1 px-2 resize-none mt-1 outline-0 focus:border-sky-500 focus:ring-sky-500 "
                 />
                 <button
-                  className="mt-5 mr-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-red-500 leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="mt-5 mr-4 mb-4 font-bold text-white inline-block px-10 py-3 bg-red-500 leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                   onClick={() => {
                     confirmAlert({
                       message:
@@ -94,7 +94,7 @@ function EpisodeView() {
                   Delete
                 </button>
                 <button
-                  className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="mt-4 mb-4 font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   onClick={() => {
                     confirmAlert({
                       message: "Are you sure to update this album?",
