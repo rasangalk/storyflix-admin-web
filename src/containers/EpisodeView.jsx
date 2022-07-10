@@ -62,7 +62,7 @@ function EpisodeView() {
 
   const deleteEpisode = async () => {
     const episodeDoc = doc(db, "Episodes", epiID);
-    deleteDoc(episodeDoc).then(navigate("/episodes/" + EpisodeID));
+    await deleteDoc(episodeDoc).then(navigate("/episodes/" + EpisodeID));
   };
 
   return (

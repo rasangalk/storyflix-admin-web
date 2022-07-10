@@ -5,14 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { confirmAlert } from "react-confirm-alert";
 import { db } from "../firebase.config";
-import {
-  getDoc,
-  deleteDoc,
-  doc,
-  updateDoc,
-  addDoc,
-  collection,
-} from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import back from "../images/back.svg";
@@ -59,14 +52,32 @@ function AddEpisode() {
   const EpisodeId = parseFloat(formatedDate);
   const CreateDate = Number(year.substr(2, 3) + month + day);
 
+  const ErrMsg = (errMsg) => {
+    toast.error(errMsg, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
   const saveEpisode = async () => {
-    await addDoc(episodeCollectionRef, {
-      AlbumID: parseFloat(albumId),
-      Content: content,
-      CreatedDate: CreateDate,
-      EpiID: EpisodeId,
-      Title: title,
-    }).then(navigate("/episodes/" + albumId));
+    if (title === "") {
+      ErrMsg("Please fill the required fields!");
+    } else if (content === "") {
+      ErrMsg("Please fill the required fields!");
+    } else {
+      await addDoc(episodeCollectionRef, {
+        AlbumID: parseFloat(albumId),
+        Content: content,
+        CreatedDate: CreateDate,
+        EpiID: EpisodeId,
+        Title: title,
+      }).then(navigate("/episodes/" + albumId));
+    }
   };
 
   return (
