@@ -4,11 +4,13 @@ import { db } from "../firebase.config";
 import { collection, getDocs } from "firebase/firestore";
 import { async } from "@firebase/util";
 import { useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
 
 function Albums() {
   const albumCollectionRef = collection(db, "Albums");
 
   const [albums, setAlbums] = useState([]);
+  const [loader, setLoader] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,6 +23,7 @@ function Albums() {
           id: doc.id,
         }))
       );
+      setLoader("a");
     };
 
     getAlbums();
@@ -66,26 +69,65 @@ function Albums() {
                       </tr>
                     </thead>
                     <tbody>
-                      {albums.map((album) => {
-                        let date = album.CreatedDate.toString();
-                        let yy = date.slice(0, 2);
-                        let mm = date.slice(2, 4);
-                        let dd = date.slice(4, 6);
-                        date = yy + "/" + mm + "/" + dd;
-                        return (
-                          <tr
-                            className="even:bg-white odd:bg-slate-100 cursor-pointer"
-                            onClick={() => {
-                              navigate("/album/" + album.id);
-                            }}
-                          >
-                            <td className=" py-2 px-2">{album.AlbumID}</td>
-                            <td className=" py-2 px-2">{album.AlbumName}</td>
-                            <td className=" py-2 px-2">{album.AuthorName}</td>
-                            <td className=" py-2 px-2">{date}</td>
+                      {loader == "a" ? (
+                        albums.map((album) => {
+                          let date = album.CreatedDate.toString();
+                          let yy = date.slice(0, 2);
+                          let mm = date.slice(2, 4);
+                          let dd = date.slice(4, 6);
+                          date = yy + "/" + mm + "/" + dd;
+                          return (
+                            <tr
+                              className="even:bg-white odd:bg-slate-100 cursor-pointer"
+                              onClick={() => {
+                                navigate("/album/" + album.id);
+                              }}
+                            >
+                              <td className=" py-2 px-2">{album.AlbumID}</td>
+                              <td className=" py-2 px-2">{album.AlbumName}</td>
+                              <td className=" py-2 px-2">{album.AuthorName}</td>
+                              <td className=" py-2 px-2">{date}</td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <>
+                          <tr>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
                           </tr>
-                        );
-                      })}
+                        </>
+                      )}
                     </tbody>
                   </table>
                 </div>
