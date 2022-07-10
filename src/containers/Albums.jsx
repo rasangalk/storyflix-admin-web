@@ -29,7 +29,7 @@ function Albums() {
   return (
     <div className="bg-[#F9F9F9] w-screen h-screen grid grid-cols-12">
       <div className="">
-        <Sidebar />
+        <Sidebar status="album" />
       </div>
       <div className="col-span-11 mx-auto">
         <button

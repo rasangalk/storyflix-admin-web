@@ -29,7 +29,7 @@ function EpisodeHome() {
   return (
     <div className="bg-[#F9F9F9] w-screen h-screen grid grid-cols-12">
       <div className="">
-        <Sidebar />
+        <Sidebar status="episode" />
       </div>
       <div className="col-span-11 mx-auto">
         <div className="grid grid-cols-12 grid-rows-6 bg-white w-[65rem] h-[40rem] mt-[5rem] rounded-2xl drop-shadow-2xl">
