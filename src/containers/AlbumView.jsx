@@ -161,19 +161,19 @@ function AlbumView() {
     } else if (selected == "" && imagePreview != "") {
       /* this section handles if the user does not modify the image but other text fields*/
       if (authorName == "") {
-        ErrMsg("Fill the required fields!");
+        ErrMsg("Please fill the required fields!");
       } else if (albumName == "") {
-        ErrMsg("Fill the required fields!");
+        ErrMsg("Please fill the required fields!");
       } else if (category == "") {
         ErrMsg("Please select an album category!");
       } else if (episodeCount == "") {
-        ErrMsg("Fill the required fields!");
+        ErrMsg("Please fill the required fields!");
       } else if (previewText == "") {
-        ErrMsg("Fill the required fields!");
+        ErrMsg("Please fill the required fields!");
       } else if (searchTags == "") {
         ErrMsg("Search Tags must be added!");
       } else if (tagline == "") {
-        ErrMsg("Fill the required fields!");
+        ErrMsg("Please fill the required fields!");
       } else if (CreateDate == "") {
         ErrMsg("Date Error!");
       } else {

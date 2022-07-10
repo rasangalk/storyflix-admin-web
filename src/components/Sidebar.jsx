@@ -24,7 +24,7 @@ function Sidebar() {
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
             onClick={() => {
-              navigate("/");
+              navigate("/episodes");
             }}
           >
             <img src={episodes} alt="episodes" />

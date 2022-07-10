@@ -15,6 +15,7 @@ function EpisodeView() {
   const { epiID } = useParams();
   const navigate = useNavigate();
 
+  const [episode, setEpisode] = useState([]);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [EpisodeID, setEpisodeID] = useState("");
@@ -22,21 +23,46 @@ function EpisodeView() {
 
   useEffect(() => {
     getDoc(epiRef).then((doc) => {
+      setEpisode(doc.data());
       setTitle(doc.data().Title);
       setContent(doc.data().Content);
       setEpisodeID(doc.data().AlbumID);
     });
   }, []);
 
-  const updateEpisode = async () => {
+  const ErrMsg = (errMsg) => {
+    toast.error(errMsg, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const updateEpisode = async (newTitle, newContent) => {
     const episodeDoc = doc(db, "Episodes", epiID);
     const newFields = {
-      Title: title,
-      Content: content,
+      Title: newTitle,
+      Content: newContent,
     };
-    await updateDoc(episodeDoc, newFields).then(
-      navigate("/episodes/" + EpisodeID)
-    );
+
+    if (title === "") {
+      ErrMsg("Please fill the required fields!");
+    } else if (content === "") {
+      ErrMsg("Please fill the required fields!");
+    } else {
+      await updateDoc(episodeDoc, newFields).then(
+        navigate("/episodes/" + EpisodeID)
+      );
+    }
+  };
+
+  const deleteEpisode = async () => {
+    const episodeDoc = doc(db, "Episodes", epiID);
+    deleteDoc(episodeDoc).then(navigate("/episodes/" + EpisodeID));
   };
 
   return (
@@ -62,7 +88,7 @@ function EpisodeView() {
               </h2>
             </div>
           </div>
-          {title ? (
+          {episode.AlbumID ? (
             <div className="col-start-2 col-span-10 grid grid-cols-12 border-2 border-[#E2E8F0] rounded-lg h-[36rem] overflow-y-auto">
               <div className="col-start-1 col-span-12 ml-12">
                 <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-9 ">
@@ -91,7 +117,9 @@ function EpisodeView() {
                       buttons: [
                         {
                           label: "Yes",
-                          onClick: () => {},
+                          onClick: () => {
+                            deleteEpisode();
+                          },
                         },
                         {
                           label: "No",
@@ -112,7 +140,7 @@ function EpisodeView() {
                         {
                           label: "Yes",
                           onClick: () => {
-                            updateEpisode();
+                            updateEpisode(title, content);
                           },
                         },
                         {
