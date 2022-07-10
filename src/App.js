@@ -1,5 +1,6 @@
 import { Routes, Route, BrowserRouter as Router } from "react-router-dom";
 import AddAlbum from "./containers/AddAlbum";
+import AddEpisode from "./containers/AddEpisode";
 import Albums from "./containers/Albums";
 import AlbumView from "./containers/AlbumView";
 import EpisodeHome from "./containers/EpisodeHome";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/episodes" element={<EpisodeHome />} />
         <Route path="/episodes/:albumId" element={<Episodes />} />
         <Route path="/episode/:epiID" element={<EpisodeView />} />
+        <Route path="/episode/create/:albumId" element={<AddEpisode />} />
       </Routes>
     </div>
   );

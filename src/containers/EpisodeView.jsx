@@ -113,7 +113,7 @@ function EpisodeView() {
                   onClick={() => {
                     confirmAlert({
                       message:
-                        "Are you sure to delete this album? This action cannot be undone later.",
+                        "Are you sure to delete this episode? This action cannot be undone later.",
                       buttons: [
                         {
                           label: "Yes",
@@ -135,7 +135,7 @@ function EpisodeView() {
                   className="mt-4 mb-4 font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   onClick={() => {
                     confirmAlert({
-                      message: "Are you sure to update this album?",
+                      message: "Are you sure to update this episode?",
                       buttons: [
                         {
                           label: "Yes",
