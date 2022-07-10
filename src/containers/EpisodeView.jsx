@@ -14,7 +14,6 @@ import back from "../images/back.svg";
 function EpisodeView() {
   const { epiID } = useParams();
   const navigate = useNavigate();
-  const albumName = "a";
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -28,6 +27,17 @@ function EpisodeView() {
       setEpisodeID(doc.data().AlbumID);
     });
   }, []);
+
+  const updateEpisode = async () => {
+    const episodeDoc = doc(db, "Episodes", epiID);
+    const newFields = {
+      Title: title,
+      Content: content,
+    };
+    await updateDoc(episodeDoc, newFields).then(
+      navigate("/episodes/" + EpisodeID)
+    );
+  };
 
   return (
     <div className="bg-[#F9F9F9] w-screen h-screen grid grid-cols-12">
@@ -61,7 +71,7 @@ function EpisodeView() {
                 <input
                   defaultValue={title}
                   type="text"
-                  //   onChange={(e) => setEpisodeCount(e.target.value)}
+                  onChange={(e) => setTitle(e.target.value)}
                   className="bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md text-base focus:ring-1 px-3 py-1"
                 />
                 <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-8 ">
@@ -69,7 +79,7 @@ function EpisodeView() {
                 </p>
                 <textarea
                   defaultValue={content}
-                  //   onChange={(e) => setTagline(e.target.value)}
+                  onChange={(e) => setContent(e.target.value)}
                   className="border-2 w-[48rem] rounded-md h-[20rem] py-1 px-2 resize-none mt-1 outline-0 focus:border-sky-500 focus:ring-sky-500 "
                 />
                 <button
@@ -85,7 +95,7 @@ function EpisodeView() {
                         },
                         {
                           label: "No",
-                          onClick: () => alert("Click No"),
+                          onClick: () => {},
                         },
                       ],
                     });
@@ -101,11 +111,13 @@ function EpisodeView() {
                       buttons: [
                         {
                           label: "Yes",
-                          onClick: () => {},
+                          onClick: () => {
+                            updateEpisode();
+                          },
                         },
                         {
                           label: "No",
-                          onClick: () => alert("Click No"),
+                          onClick: () => {},
                         },
                       ],
                     });
