@@ -3,12 +3,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { db } from "../firebase.config";
 import { collection, getDocs, query, where } from "firebase/firestore";
+import ReactLoading from "react-loading";
 
 function Episodes() {
   const navigate = useNavigate();
   const { albumId } = useParams();
   const id = parseFloat(albumId);
   const [episodes, setEpisodes] = useState([]);
+  const [loader, setloader] = useState("");
+
   const episodesRef = collection(db, "Episodes");
   const q = query(episodesRef, where("AlbumID", "==", id));
 
@@ -21,6 +24,7 @@ function Episodes() {
           id: doc.id,
         }))
       );
+      setloader("a");
     };
 
     getEpisodes();
@@ -63,25 +67,64 @@ function Episodes() {
                       </tr>
                     </thead>
                     <tbody>
-                      {episodes.map((epi) => {
-                        let date = epi.CreatedDate.toString();
-                        let yy = date.slice(0, 2);
-                        let mm = date.slice(2, 4);
-                        let dd = date.slice(4, 6);
-                        date = yy + "/" + mm + "/" + dd;
-                        return (
-                          <tr
-                            className="even:bg-white odd:bg-slate-100 cursor-pointer"
-                            onClick={() => {
-                              navigate("/episode/" + epi.id);
-                            }}
-                          >
-                            <td className=" py-2 px-2">{epi.EpiID}</td>
-                            <td className=" py-2 px-2">{epi.Title}</td>
-                            <td className=" py-2 px-2">{date}</td>
+                      {loader == "a" ? (
+                        episodes.map((epi) => {
+                          let date = epi.CreatedDate.toString();
+                          let yy = date.slice(0, 2);
+                          let mm = date.slice(2, 4);
+                          let dd = date.slice(4, 6);
+                          date = yy + "/" + mm + "/" + dd;
+                          return (
+                            <tr
+                              className="even:bg-white odd:bg-slate-100 cursor-pointer"
+                              onClick={() => {
+                                navigate("/episode/" + epi.id);
+                              }}
+                            >
+                              <td className=" py-2 px-2">{epi.EpiID}</td>
+                              <td className=" py-2 px-2">{epi.Title}</td>
+                              <td className=" py-2 px-2">{date}</td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <>
+                          <tr>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
                           </tr>
-                        );
-                      })}
+                        </>
+                      )}
                     </tbody>
                   </table>
                 </div>

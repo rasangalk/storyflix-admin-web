@@ -4,11 +4,13 @@ import { db } from "../firebase.config";
 import { collection, getDocs } from "firebase/firestore";
 import { async } from "@firebase/util";
 import { useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
 
 function EpisodeHome() {
   const albumCollectionRef = collection(db, "Albums");
 
   const [albums, setAlbums] = useState([]);
+  const [loader, setloader] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,6 +23,7 @@ function EpisodeHome() {
           id: doc.id,
         }))
       );
+      setloader("a");
     };
 
     getAlbums();
@@ -52,19 +55,58 @@ function EpisodeHome() {
                       </tr>
                     </thead>
                     <tbody>
-                      {albums.map((album) => {
-                        return (
-                          <tr
-                            className="even:bg-white odd:bg-slate-100 cursor-pointer"
-                            onClick={() => {
-                              navigate("/episodes/" + album.AlbumID);
-                            }}
-                          >
-                            <td className=" py-2 px-2">{album.AlbumName}</td>
-                            <td className=" py-2 px-2">{album.AuthorName}</td>
+                      {loader == "a" ? (
+                        albums.map((album) => {
+                          return (
+                            <tr
+                              className="even:bg-white odd:bg-slate-100 cursor-pointer"
+                              onClick={() => {
+                                navigate("/episodes/" + album.AlbumID);
+                              }}
+                            >
+                              <td className=" py-2 px-2">{album.AlbumName}</td>
+                              <td className=" py-2 px-2">{album.AuthorName}</td>
+                            </tr>
+                          );
+                        })
+                      ) : (
+                        <>
+                          <tr>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
+                            <td className=" py-2 px-2">
+                              <ReactLoading
+                                type="cylon"
+                                color="#333333"
+                                height={100}
+                                width={50}
+                              />
+                            </td>
                           </tr>
-                        );
-                      })}
+                        </>
+                      )}
                     </tbody>
                   </table>
                 </div>
