@@ -61,7 +61,7 @@ function Sidebar({ status }) {
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
             onClick={() => {
-              navigate("/");
+              navigate("/notifications");
             }}
           >
             <img src={notifications} alt="notifications" />
@@ -90,7 +90,7 @@ function Sidebar({ status }) {
           <div
             className="py-2 px-9 bg-slate-300 rounded-r-xl cursor-pointer"
             onClick={() => {
-              navigate("/");
+              navigate("/notifications");
             }}
           >
             <img src={notifications} alt="notifications" />
@@ -119,7 +119,7 @@ function Sidebar({ status }) {
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
             onClick={() => {
-              navigate("/");
+              navigate("/notifications");
             }}
           >
             <img src={notifications} alt="notifications" />
