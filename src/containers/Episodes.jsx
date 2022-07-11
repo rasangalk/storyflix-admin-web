@@ -33,7 +33,7 @@ function Episodes() {
   return (
     <div className="bg-[#F9F9F9] w-screen h-screen grid grid-cols-12">
       <div className="">
-        <Sidebar />
+        <Sidebar status="episode" />
       </div>
       <div className="col-span-11 mx-auto">
         <button
