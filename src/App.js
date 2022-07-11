@@ -6,12 +6,14 @@ import AlbumView from "./containers/AlbumView";
 import EpisodeHome from "./containers/EpisodeHome";
 import Episodes from "./containers/Episodes";
 import EpisodeView from "./containers/EpisodeView";
+import Login from "./containers/Login";
 import NotificationCenter from "./containers/NotificationCenter";
 
 function App() {
   return (
     <div className="App">
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Albums />} />
         <Route path="/album/create" element={<AddAlbum />} />
         <Route path="/album/:albumId" element={<AlbumView />} />

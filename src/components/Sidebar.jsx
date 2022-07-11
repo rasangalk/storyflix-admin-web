@@ -12,9 +12,9 @@ function Sidebar({ status }) {
   const activeTab = (status) => {
     if (status == "album") {
       return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1">
           <div
-            className="py-2 px-9 bg-slate-300 rounded-r-xl cursor-pointer"
+            className="py-2 px-9 bg-slate-200 rounded-r-xl cursor-pointer"
             onClick={() => {
               navigate("/");
             }}
@@ -41,7 +41,7 @@ function Sidebar({ status }) {
       );
     } else if (status == "episode") {
       return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1">
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
             onClick={() => {
@@ -51,7 +51,7 @@ function Sidebar({ status }) {
             <img src={albums} alt="albums" />
           </div>
           <div
-            className="py-2 px-9 bg-slate-300 rounded-r-xl cursor-pointer"
+            className="py-2 px-9 bg-slate-200 rounded-r-xl cursor-pointer"
             onClick={() => {
               navigate("/episodes");
             }}
@@ -70,7 +70,7 @@ function Sidebar({ status }) {
       );
     } else if (status == "notification") {
       return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1">
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
             onClick={() => {
@@ -88,7 +88,7 @@ function Sidebar({ status }) {
             <img src={episodes} alt="episodes" />
           </div>
           <div
-            className="py-2 px-9 bg-slate-300 rounded-r-xl cursor-pointer"
+            className="py-2 px-9 bg-slate-200 rounded-r-xl cursor-pointer"
             onClick={() => {
               navigate("/notifications");
             }}
@@ -99,7 +99,7 @@ function Sidebar({ status }) {
       );
     } else {
       return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1">
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
             onClick={() => {
@@ -134,7 +134,7 @@ function Sidebar({ status }) {
         <img src={logo} alt="logo" className="w-10" />
         {activeTab(status)}
         <div>
-          <img src={logout} alt="logout" />
+          <img src={logout} alt="logout" className="cursor-pointer" />
         </div>
       </div>
     </div>
