@@ -6,7 +6,7 @@ import back from "../images/back.svg";
 import bin from "../images/bin.svg";
 import { storage } from "../firebase.config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate } from "react-router-dom";
 
@@ -153,7 +153,20 @@ function AddAlbum() {
     } else if (CreateDate == "") {
       ErrMsg("Date Error!");
     } else {
-      await addDoc(albumCollectionRef, {
+      // await addDoc(albumCollectionRef, {
+      //   AlbumID: AlbumID,
+      //   AuthorName: authorName,
+      //   CoverURL: url,
+      //   AlbumName: albumName,
+      //   CategoryID: parseInt(category),
+      //   EpiCount: parseInt(episodeCount),
+      //   PreviewText: previewText,
+      //   SearchTags: searchTags,
+      //   Tagline: tagline,
+      //   CreatedDate: CreateDate,
+      //   ViewCount: 0,
+      // }).then(navigate("/"));
+      const data = {
         AlbumID: AlbumID,
         AuthorName: authorName,
         CoverURL: url,
@@ -165,7 +178,8 @@ function AddAlbum() {
         Tagline: tagline,
         CreatedDate: CreateDate,
         ViewCount: 0,
-      }).then(navigate("/"));
+      };
+      await setDoc(doc(db, "Albums", `${AlbumID}`), data).then(navigate("/"));
     }
   };
 

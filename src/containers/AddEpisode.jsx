@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { confirmAlert } from "react-confirm-alert";
 import { db } from "../firebase.config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 
 import "react-confirm-alert/src/react-confirm-alert.css";
 import back from "../images/back.svg";
@@ -70,13 +70,25 @@ function AddEpisode() {
     } else if (content === "") {
       ErrMsg("Please fill the required fields!");
     } else {
-      await addDoc(episodeCollectionRef, {
+      // await addDoc(episodeCollectionRef, {
+      //   AlbumID: parseFloat(albumId),
+      //   Content: content,
+      //   CreatedDate: CreateDate,
+      //   EpiID: EpisodeId,
+      //   Title: title,
+      // }).then(navigate("/episodes/" + albumId));
+
+      const data = {
         AlbumID: parseFloat(albumId),
         Content: content,
         CreatedDate: CreateDate,
         EpiID: EpisodeId,
         Title: title,
-      }).then(navigate("/episodes/" + albumId));
+      };
+
+      await setDoc(doc(db, "Episodes", `${EpisodeId}`), data)
+        .then(navigate("/"))
+        .then(navigate("/episodes/" + albumId));
     }
   };
 
