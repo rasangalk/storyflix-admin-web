@@ -100,9 +100,13 @@ function AlbumView() {
   };
 
   const handleAddSearchTag = () => {
-    setSearchTags([...searchTags, value]);
-    setValue(null);
-    setValue("");
+    if (value === "" || value === null) {
+      ErrMsg("Search tag should not be null");
+    } else {
+      setSearchTags([...searchTags, value]);
+      setValue(null);
+      setValue("");
+    }
   };
 
   const handleDelete = (index) => {
@@ -427,7 +431,7 @@ function AlbumView() {
                   Delete
                 </button>
                 <button
-                  className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   onClick={() => {
                     confirmAlert({
                       message: "Are you sure to update this album?",

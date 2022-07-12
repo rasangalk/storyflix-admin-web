@@ -9,6 +9,11 @@ import { useNavigate } from "react-router-dom";
 function Sidebar({ status }) {
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    window.localStorage.clear();
+    window.location.reload(false);
+  };
+
   const activeTab = (status) => {
     if (status == "album") {
       return (
@@ -32,7 +37,7 @@ function Sidebar({ status }) {
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
             onClick={() => {
-              navigate("/");
+              navigate("/notifications");
             }}
           >
             <img src={notifications} alt="notifications" />
@@ -134,7 +139,12 @@ function Sidebar({ status }) {
         <img src={logo} alt="logo" className="w-10" />
         {activeTab(status)}
         <div>
-          <img src={logout} alt="logout" className="cursor-pointer" />
+          <img
+            src={logout}
+            alt="logout"
+            className="cursor-pointer"
+            onClick={handleLogout}
+          />
         </div>
       </div>
     </div>
