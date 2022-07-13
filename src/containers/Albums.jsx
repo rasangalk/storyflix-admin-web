@@ -34,9 +34,9 @@ function Albums() {
       <div className="">
         <Sidebar status="album" />
       </div>
-      <div className="col-span-11 mx-auto">
+      <div className="col-span-11 mx-auto my-auto">
         <button
-          className="mt-[6rem] ml-[55rem] font-bold text-white inline-block px-10 py-3 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+          className="mt-[1rem] ml-[55rem] font-bold text-white inline-block px-10 py-3 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
           onClick={() => {
             navigate("/album/create");
           }}

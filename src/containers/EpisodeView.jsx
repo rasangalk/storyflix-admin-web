@@ -70,9 +70,9 @@ function EpisodeView() {
       <div className="">
         <Sidebar status="episode" />
       </div>
-      <div className="col-span-11 mx-auto">
+      <div className="col-span-11 mx-auto my-auto">
         <ToastContainer />
-        <div className="grid grid-cols-12 grid-rows-6 bg-white w-[65rem] h-[48rem] mt-[2rem] rounded-2xl drop-shadow-2xl">
+        <div className="grid grid-cols-12 grid-rows-6 bg-white w-[65rem] h-[48rem]  rounded-2xl drop-shadow-2xl">
           <div className="col-span-12">
             <div className="flex flex-row items-end ml-8">
               <img

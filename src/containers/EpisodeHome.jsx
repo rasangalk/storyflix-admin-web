@@ -34,10 +34,10 @@ function EpisodeHome() {
       <div className="">
         <Sidebar status="episode" />
       </div>
-      <div className="col-span-11 mx-auto">
-        <div className="grid grid-cols-12 grid-rows-6 bg-white w-[65rem] h-[40rem] mt-[5rem] rounded-2xl drop-shadow-2xl">
+      <div className="col-span-11 mx-auto my-auto">
+        <div className="grid grid-cols-12 grid-rows-6 bg-white w-[65rem] h-[40rem] mt-[2rem] rounded-2xl drop-shadow-2xl">
           <div className="col-span-12">
-            <h2 className="font-semibold text-4xl ml-6 mt-8">Albums</h2>
+            <h2 className="font-semibold text-4xl ml-6 mt-6">Albums</h2>
           </div>
           <div className="row-span-5 my-auto">
             <div className="h-full w-full">
