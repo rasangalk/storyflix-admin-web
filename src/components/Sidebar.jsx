@@ -5,8 +5,8 @@ function Sidebar({ status }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    window.localStorage.clear();
-    window.location.reload(false);
+    // window.localStorage.clear();
+    // window.location.reload(false);
   };
 
   const activeTab = (status) => {
