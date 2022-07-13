@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import album from "../images/albums.svg";
 
 function Sidebar({ status }) {
   const navigate = useNavigate();
@@ -19,10 +20,7 @@ function Sidebar({ status }) {
               navigate("/");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Falbums.svg?alt=media&token=99f5ca76-ae1b-4d44-8096-10ae510b961a"
-              alt="albums"
-            />
+            <img src={album} alt="albums" />
           </div>
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
@@ -57,10 +55,7 @@ function Sidebar({ status }) {
               navigate("/");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Falbums.svg?alt=media&token=99f5ca76-ae1b-4d44-8096-10ae510b961a"
-              alt="albums"
-            />
+            <img src={album} alt="albums" />
           </div>
           <div
             className="py-2 px-9 bg-slate-200 rounded-r-xl cursor-pointer"
@@ -95,10 +90,7 @@ function Sidebar({ status }) {
               navigate("/");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Falbums.svg?alt=media&token=99f5ca76-ae1b-4d44-8096-10ae510b961a"
-              alt="albums"
-            />
+            <img src={album} alt="albums" />
           </div>
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
@@ -133,10 +125,7 @@ function Sidebar({ status }) {
               navigate("/");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Falbums.svg?alt=media&token=99f5ca76-ae1b-4d44-8096-10ae510b961a"
-              alt="albums"
-            />
+            <img src={album} alt="albums" />
           </div>
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
