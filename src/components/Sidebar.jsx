@@ -32,131 +32,140 @@ function Sidebar({ status }) {
   const activeTab = (status) => {
     if (status == "album") {
       return (
-        <div className="flex flex-col gap-1">
-          <div
-            className="py-2 px-9 bg-slate-200 rounded-r-xl cursor-pointer"
+        <div className="flex flex-col gap-[1px] list-none w-full items-center">
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl  bg-slate-300 hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/");
             }}
           >
-            <img src={album} alt="albums" />
-          </div>
-          <div
-            className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
+            <div>
+              <img src={album} alt="albums" />
+            </div>
+          </li>
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl   hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/episodes");
             }}
           >
             <img src={episodes} alt="episodes" />
-          </div>
-          <div
-            className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
+          </li>
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl   hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/notifications");
             }}
           >
             <img src={notifications} alt="notifications" />
-          </div>
+          </li>
         </div>
       );
     } else if (status == "episode") {
       return (
-        <div className="flex flex-col gap-1">
-          <div
-            className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
+        <div className="flex flex-col gap-[1px] list-none w-full items-center">
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl  hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/");
             }}
           >
-            <img src={album} alt="albums" />
-          </div>
-          <div
-            className="py-2 px-9 bg-slate-200 rounded-r-xl cursor-pointer"
+            <div>
+              <img src={album} alt="albums" />
+            </div>
+          </li>
+          <li
+            className="bg-slate-300 w-full h-12 items-center flex justify-center rounded-r-xl   hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/episodes");
             }}
           >
             <img src={episodes} alt="episodes" />
-          </div>
-          <div
-            className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
+          </li>
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl   hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/notifications");
             }}
           >
             <img src={notifications} alt="notifications" />
-          </div>
+          </li>
         </div>
       );
     } else if (status == "notification") {
       return (
-        <div className="flex flex-col gap-1">
-          <div
-            className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
+        <div className="flex flex-col gap-[1px] list-none w-full items-center">
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl  hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/");
             }}
           >
-            <img src={album} alt="albums" />
-          </div>
-          <div
-            className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
+            <div>
+              <img src={album} alt="albums" />
+            </div>
+          </li>
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl   hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/episodes");
             }}
           >
             <img src={episodes} alt="episodes" />
-          </div>
-          <div
-            className="py-2 px-9 bg-slate-200 rounded-r-xl cursor-pointer"
+          </li>
+          <li
+            className="bg-slate-300 w-full h-12 items-center flex justify-center rounded-r-xl   hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/notifications");
             }}
           >
             <img src={notifications} alt="notifications" />
-          </div>
+          </li>
         </div>
       );
     } else {
       return (
-        <div className="flex flex-col gap-1">
-          <div
-            className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
+        <div className="flex flex-col gap-[1px] list-none w-full items-center">
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl  hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/");
             }}
           >
-            <img src={album} alt="albums" />
-          </div>
-          <div
-            className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
+            <div>
+              <img src={album} alt="albums" />
+            </div>
+          </li>
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl   hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/episodes");
             }}
           >
             <img src={episodes} alt="episodes" />
-          </div>
-          <div
-            className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
+          </li>
+          <li
+            className="w-full h-12 items-center flex justify-center rounded-r-xl   hover:bg-slate-200 cursor-pointer"
             onClick={() => {
               navigate("/notifications");
             }}
           >
             <img src={notifications} alt="notifications" />
-          </div>
+          </li>
         </div>
       );
     }
   };
   return (
     <div>
-      <div className="flex flex-col bg-white h-screen items-center space-y-[17rem] pt-12 rounded-r-2xl">
+      <div className="flex flex-col bg-white h-screen items-center pt-12 rounded-r-2xl justify-between pb-12">
         <img
           src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Flogo.svg?alt=media&token=99810c96-a9bc-4751-bcfb-f5649835c285"
           alt="logo"
           className="w-10"
         />
         {activeTab(status)}
+
         <div>
           <img
             src={logout}
