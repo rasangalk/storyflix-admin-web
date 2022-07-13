@@ -45,7 +45,11 @@ function Login() {
       <div className="bg-white h-[28rem] w-[23rem] rounded-xl drop-shadow-2xl flex flex-column">
         <div className="mx-6">
           <div className="flex flex-row gap-2 mt-6 items-center">
-            <img src={logo} alt="logo" className="w-9 h-10" />
+            <img
+              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Flogo.svg?alt=media&token=99810c96-a9bc-4751-bcfb-f5649835c285"
+              alt="logo"
+              className="w-9 h-10"
+            />
             <h2 className="font-semibold text-2xl opacity-[84%]">Log in</h2>
           </div>
           <div>
