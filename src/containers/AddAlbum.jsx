@@ -324,7 +324,7 @@ function AddAlbum() {
                   />
                 </div>
                 <button
-                  className="mt-4 inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out h-9"
+                  className="mt-4 mr-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-red-500 leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                   onClick={handleAddSearchTag}
                 >
                   add

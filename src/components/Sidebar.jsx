@@ -4,13 +4,29 @@ import album from "../images/albums.svg";
 import episodes from "../images/episodes.svg";
 import notifications from "../images/notifications.svg";
 import logout from "../images/logout.svg";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 function Sidebar({ status }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    window.localStorage.clear();
-    window.location.reload(false);
+    confirmAlert({
+      message: "Are you sure to logout?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            window.localStorage.clear();
+            window.location.reload(false);
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
   };
 
   const activeTab = (status) => {

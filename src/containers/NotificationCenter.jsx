@@ -65,8 +65,9 @@ function NotificationCenter() {
                 onChange={(e) => setBody(e.target.value)}
                 className="border-2 w-[48rem] rounded-md h-[5rem] py-1 px-2 resize-none mt-1 outline-0 focus:border-sky-500 focus:ring-sky-500 "
               />
+
               <button
-                className="mt-8 mb-4 font-bold text-white inline-block px-10 py-3 bg-blue-600 leading-tight rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                className="mt-8 mb-4 font-bold text-white inline-block px-10 py-3 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 onClick={() => {
                   confirmAlert({
                     message: "Are you sure to save this episode?",

@@ -25,19 +25,23 @@ function Login() {
   };
 
   const login = async () => {
-    const user = await signInWithEmailAndPassword(auth, email, password)
-      .then((user) => {
-        const token = user._tokenResponse.idToken;
-        localStorage.setItem("token", token);
-        navigate("/");
-      })
-      .catch((err) => {
-        if (err.code === "auth/wrong-password") {
-          ErrMsg("Please enter the correct password!");
-        } else if (err.code === "auth/user-not-found") {
-          ErrMsg("Please check the email and try again!");
-        }
-      });
+    if (email === "" || password === "") {
+      ErrMsg("Please fill the required fields!");
+    } else {
+      const user = await signInWithEmailAndPassword(auth, email, password)
+        .then((user) => {
+          const token = user._tokenResponse.idToken;
+          localStorage.setItem("token", token);
+          navigate("/");
+        })
+        .catch((err) => {
+          if (err.code === "auth/wrong-password") {
+            ErrMsg("Please enter the correct password!");
+          } else if (err.code === "auth/user-not-found") {
+            ErrMsg("Please check the email and try again!");
+          }
+        });
+    }
   };
   return (
     <div className="flex h-screen w-screen bg-[#F9F9F9] items-center justify-center">
