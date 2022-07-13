@@ -1,6 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import album from "../images/albums.svg";
+import episodes from "../images/episodes.svg";
+import notifications from "../images/notifications.svg";
+import logout from "../images/logout.svg";
 
 function Sidebar({ status }) {
   const navigate = useNavigate();
@@ -28,10 +31,7 @@ function Sidebar({ status }) {
               navigate("/episodes");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Fepisodes.svg?alt=media&token=75ea8162-0148-452c-aef2-6a3ee1a60ad6"
-              alt="episodes"
-            />
+            <img src={episodes} alt="episodes" />
           </div>
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
@@ -39,10 +39,7 @@ function Sidebar({ status }) {
               navigate("/notifications");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Fnotifications.svg?alt=media&token=0bdbe64f-b807-4d8f-a1d2-97291dea5179"
-              alt="notifications"
-            />
+            <img src={notifications} alt="notifications" />
           </div>
         </div>
       );
@@ -63,10 +60,7 @@ function Sidebar({ status }) {
               navigate("/episodes");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Fepisodes.svg?alt=media&token=75ea8162-0148-452c-aef2-6a3ee1a60ad6"
-              alt="episodes"
-            />
+            <img src={episodes} alt="episodes" />
           </div>
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
@@ -74,10 +68,7 @@ function Sidebar({ status }) {
               navigate("/notifications");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Fnotifications.svg?alt=media&token=0bdbe64f-b807-4d8f-a1d2-97291dea5179"
-              alt="notifications"
-            />
+            <img src={notifications} alt="notifications" />
           </div>
         </div>
       );
@@ -98,10 +89,7 @@ function Sidebar({ status }) {
               navigate("/episodes");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Fepisodes.svg?alt=media&token=75ea8162-0148-452c-aef2-6a3ee1a60ad6"
-              alt="episodes"
-            />
+            <img src={episodes} alt="episodes" />
           </div>
           <div
             className="py-2 px-9 bg-slate-200 rounded-r-xl cursor-pointer"
@@ -109,10 +97,7 @@ function Sidebar({ status }) {
               navigate("/notifications");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Fnotifications.svg?alt=media&token=0bdbe64f-b807-4d8f-a1d2-97291dea5179"
-              alt="notifications"
-            />
+            <img src={notifications} alt="notifications" />
           </div>
         </div>
       );
@@ -133,10 +118,7 @@ function Sidebar({ status }) {
               navigate("/episodes");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Fepisodes.svg?alt=media&token=75ea8162-0148-452c-aef2-6a3ee1a60ad6"
-              alt="episodes"
-            />
+            <img src={episodes} alt="episodes" />
           </div>
           <div
             className="py-2 px-9 hover:bg-slate-300 rounded-r-xl cursor-pointer"
@@ -144,10 +126,7 @@ function Sidebar({ status }) {
               navigate("/notifications");
             }}
           >
-            <img
-              src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Fnotifications.svg?alt=media&token=0bdbe64f-b807-4d8f-a1d2-97291dea5179"
-              alt="notifications"
-            />
+            <img src={notifications} alt="notifications" />
           </div>
         </div>
       );
@@ -164,7 +143,7 @@ function Sidebar({ status }) {
         {activeTab(status)}
         <div>
           <img
-            src="https://firebasestorage.googleapis.com/v0/b/prototype-storyflix.appspot.com/o/web%2Flogout.svg?alt=media&token=1ce3899c-2366-4303-91b6-791d05d558d3"
+            src={logout}
             alt="logout"
             className="cursor-pointer"
             onClick={handleLogout}
