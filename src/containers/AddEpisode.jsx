@@ -10,6 +10,9 @@ import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import back from "../images/back.svg";
 
+/**
+ * This functional component is responsible fot adding a new episode to an album
+ */
 function AddEpisode() {
   const navigate = useNavigate();
   const { albumId } = useParams();
@@ -52,6 +55,7 @@ function AddEpisode() {
   const EpisodeId = parseFloat(formatedDate);
   const CreateDate = Number(year.substr(2, 3) + month + day);
 
+  // Handles error notification toast message
   const ErrMsg = (errMsg) => {
     toast.error(errMsg, {
       position: "top-right",
@@ -64,20 +68,13 @@ function AddEpisode() {
     });
   };
 
+  // Handles adding a new episode to an album
   const saveEpisode = async () => {
     if (title === "") {
       ErrMsg("Please fill the required fields!");
     } else if (content === "") {
       ErrMsg("Please fill the required fields!");
     } else {
-      // await addDoc(episodeCollectionRef, {
-      //   AlbumID: parseFloat(albumId),
-      //   Content: content,
-      //   CreatedDate: CreateDate,
-      //   EpiID: EpisodeId,
-      //   Title: title,
-      // }).then(navigate("/episodes/" + albumId));
-
       const data = {
         AlbumID: parseFloat(albumId),
         Content: content,
