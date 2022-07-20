@@ -10,15 +10,20 @@ import { addDoc, collection, setDoc, doc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * This functional component handles adding albums
+ */
 function AddAlbum() {
-  // firestore collection reference
+  // Firestore collection reference
   const albumCollectionRef = collection(db, "Albums");
 
+  // This useNavigate uses to naviagate between other components
   const navigate = useNavigate();
 
   const [selected, setSelected] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
 
+  // This handles adding an image after clicking "Choose Cover"
   const handleImageChange = (e) => {
     const selected = e.target.files[0];
     setSelected(selected);
@@ -44,7 +49,7 @@ function AddAlbum() {
   const [previewText, setPreviewText] = useState("");
   const [tagline, setTagline] = useState("");
 
-  //=================================== Albem Id Generate ===================================
+  /************************ Generating an Album ID ************************/
   var today = new Date();
   // returns year as YY
   var year = today.getFullYear().toString();
@@ -79,6 +84,7 @@ function AddAlbum() {
   const AlbumID = parseFloat(formatedDate);
   const CreateDate = Number(year.substr(2, 3) + month + day);
 
+  // Handles adding a search tag after clicking "add"
   const handleAddSearchTag = () => {
     if (value === "" || value === null) {
       ErrMsg("Search tag should not be null");
@@ -89,12 +95,14 @@ function AddAlbum() {
     }
   };
 
+  // Handles removing a search tag after clicking the bin icon in the added search tag list
   const handleDelete = (index) => {
     let list = [...searchTags];
     list.splice(index, 1);
     setSearchTags(list);
   };
 
+  // Handles error notification toasts
   const ErrMsg = (errMsg) => {
     toast.error(errMsg, {
       position: "top-right",
@@ -107,6 +115,7 @@ function AddAlbum() {
     });
   };
 
+  // Handles adding a new Album after clicking "Add New"
   const handleAddNew = () => {
     const imageRef = ref(storage, `BooksImages/${selected.name}`);
     if (selected == "") {
@@ -131,6 +140,7 @@ function AddAlbum() {
       progress: undefined,
     });
 
+  // Handles sending Album details to firestore collection
   const SendData = async (url) => {
     if (AlbumID == 0) {
       ErrMsg("Album ID Error!");
@@ -151,19 +161,6 @@ function AddAlbum() {
     } else if (CreateDate == "") {
       ErrMsg("Date Error!");
     } else {
-      // await addDoc(albumCollectionRef, {
-      //   AlbumID: AlbumID,
-      //   AuthorName: authorName,
-      //   CoverURL: url,
-      //   AlbumName: albumName,
-      //   CategoryID: parseInt(category),
-      //   EpiCount: parseInt(episodeCount),
-      //   PreviewText: previewText,
-      //   SearchTags: searchTags,
-      //   Tagline: tagline,
-      //   CreatedDate: CreateDate,
-      //   ViewCount: 0,
-      // }).then(navigate("/"));
       const data = {
         AlbumID: AlbumID,
         AuthorName: authorName,
@@ -181,6 +178,7 @@ function AddAlbum() {
     }
   };
 
+  // Handles the error toast of adding an unsupported file format to album cover
   const errNotify = () =>
     toast.error("File format not supported!", {
       position: "top-right",
@@ -260,7 +258,6 @@ function AddAlbum() {
               </p>
               <input
                 type="text"
-                // defaultValue={students.group.students.leader.email}
                 onChange={(e) => setAlbumName(e.target.value)}
                 className="bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md text-base focus:ring-1 px-3 py-1"
               />
