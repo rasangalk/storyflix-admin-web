@@ -335,6 +335,7 @@ function AlbumView() {
                   Category
                 </p>
                 <select
+                  defaultValue={category}
                   onChange={(e) => setCategory(e.target.value)}
                   className="mt-1 px-3 py-1 bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md focus:ring-1"
                 >
@@ -408,7 +409,7 @@ function AlbumView() {
                   ))}
                 </div>
                 <button
-                  className="mt-4 mr-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-red-500 leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="mt-4 mr-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-red-500 leading-tight rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
                   onClick={() => {
                     confirmAlert({
                       message:
@@ -431,7 +432,7 @@ function AlbumView() {
                   Delete
                 </button>
                 <button
-                  className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+                  className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   onClick={() => {
                     confirmAlert({
                       message: "Are you sure to update this album?",
