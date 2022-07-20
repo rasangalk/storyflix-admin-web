@@ -306,9 +306,9 @@ function AddAlbum() {
                 onChange={(e) => setTagline(e.target.value)}
                 className=" border-2 w-[48rem] rounded-md h-20 py-1 px-2 resize-none mt-1 outline-0 focus:border-sky-500 focus:ring-sky-500 "
               />
-              <div className="flex flex-row items-end gap-4 mt-[-1rem]">
+              <div className="flex flex-row items-center gap-4 mt-[1rem]">
                 <div>
-                  <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 mt-14 ">
+                  <p className="after:content-['*'] after:ml-0.5 after:text-red-500 capitalize text-base text-slate-700 text-sm mb-1 ">
                     Search Tags
                   </p>
                   <input
@@ -319,7 +319,7 @@ function AddAlbum() {
                   />
                 </div>
                 <button
-                  className="mt-4 mr-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800  active:shadow-lg transition duration-150 ease-in-out"
+                  className="mt-[2.4rem] mr-4 mb-[1rem] font-bold text-white inline-block px-8 py-2 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800  active:shadow-lg transition duration-150 ease-in-out"
                   onClick={handleAddSearchTag}
                 >
                   add
