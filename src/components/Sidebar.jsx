@@ -7,9 +7,13 @@ import logout from "../images/logout.svg";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
+/*
+ * This is sidebar of the admin pannel
+ */
 function Sidebar({ status }) {
   const navigate = useNavigate();
 
+  // this function handles logging out of a user
   const handleLogout = () => {
     confirmAlert({
       message: "Are you sure to logout?",
@@ -29,6 +33,7 @@ function Sidebar({ status }) {
     });
   };
 
+  /* This function is responsible for showing the active tab with a white background color */
   const activeTab = (status) => {
     if (status == "album") {
       return (
@@ -164,6 +169,7 @@ function Sidebar({ status }) {
           alt="logo"
           className="w-10"
         />
+
         {activeTab(status)}
 
         <div>
