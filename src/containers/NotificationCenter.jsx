@@ -29,8 +29,22 @@ function NotificationCenter() {
     } else if (body === "") {
       ErrMsg("Please fill the required fields!");
     } else {
+      notify();
+      setTitle("");
+      setBody("");
     }
   };
+
+  const notify = () =>
+    toast.success("🤩 Notification sent....", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   return (
     <div className="bg-[#F9F9F9] w-screen h-screen grid grid-cols-12">
@@ -55,6 +69,7 @@ function NotificationCenter() {
               </p>
               <input
                 type="text"
+                value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="bg-white border border-slate-300 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block lg:w-[25rem] sm:w-[25rem] rounded-md text-base focus:ring-1 px-3 py-1"
               />
@@ -62,6 +77,7 @@ function NotificationCenter() {
                 Notification Body
               </p>
               <textarea
+                value={body}
                 onChange={(e) => setBody(e.target.value)}
                 className="border-2 w-[48rem] rounded-md h-[5rem] py-1 px-2 resize-none mt-1 outline-0 focus:border-sky-500 focus:ring-sky-500 "
               />
@@ -70,7 +86,7 @@ function NotificationCenter() {
                 className="mt-8 mb-4 font-bold text-white inline-block px-10 py-3 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 onClick={() => {
                   confirmAlert({
-                    message: "Are you sure to save this episode?",
+                    message: "Are you sure to send this notification?",
                     buttons: [
                       {
                         label: "Yes",
