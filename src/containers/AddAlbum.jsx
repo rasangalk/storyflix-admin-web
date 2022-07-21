@@ -146,7 +146,7 @@ function AddAlbum() {
     }
   };
 
-  // Handles success notification toast ddddd
+  // Handles success notification toast
   const notify = () =>
     toast.success("🤩 Album is saving....", {
       position: "top-right",
