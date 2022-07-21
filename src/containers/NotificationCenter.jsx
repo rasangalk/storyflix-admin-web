@@ -35,6 +35,7 @@ function NotificationCenter() {
     }
   };
 
+  // Handles success toast message
   const notify = () =>
     toast.success("🤩 Notification sent....", {
       position: "top-right",
