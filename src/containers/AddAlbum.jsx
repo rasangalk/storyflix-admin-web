@@ -120,7 +120,24 @@ function AddAlbum() {
     const imageRef = ref(storage, `BooksImages/${selected.name}`);
     if (selected == "") {
       ErrMsg("Cover image must be added!");
+    } else if (AlbumID == 0) {
+      ErrMsg("Album ID Error!");
+    } else if (authorName == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (albumName == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (category == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (previewText == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (searchTags == "") {
+      ErrMsg("Search Tags must be added!");
+    } else if (tagline == "") {
+      ErrMsg("Fill the required fields!");
+    } else if (CreateDate == "") {
+      ErrMsg("Date Error!");
     } else {
+      notify();
       uploadBytes(imageRef, selected).then(() => {
         getDownloadURL(imageRef).then((url) => {
           SendData(url);
@@ -143,24 +160,8 @@ function AddAlbum() {
 
   // Handles sending Album details to firestore collection
   const SendData = async (url) => {
-    if (AlbumID == 0) {
-      ErrMsg("Album ID Error!");
-    } else if (authorName == "") {
-      ErrMsg("Fill the required fields!");
-    } else if (url == "") {
+    if (url == "") {
       ErrMsg("Cover URL Error!");
-    } else if (albumName == "") {
-      ErrMsg("Fill the required fields!");
-    } else if (category == "") {
-      ErrMsg("Fill the required fields!");
-    } else if (previewText == "") {
-      ErrMsg("Fill the required fields!");
-    } else if (searchTags == "") {
-      ErrMsg("Search Tags must be added!");
-    } else if (tagline == "") {
-      ErrMsg("Fill the required fields!");
-    } else if (CreateDate == "") {
-      ErrMsg("Date Error!");
     } else {
       const data = {
         AlbumID: AlbumID,
@@ -344,7 +345,6 @@ function AddAlbum() {
               <button
                 className="mt-4 mb-8 font-bold text-white inline-block px-10 py-3 bg-[#0085FF] leading-tight rounded shadow-md hover:bg-[#017CED] hover:shadow-lg focus:bg-[#0478E2] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 onClick={() => {
-                  notify();
                   handleAddNew();
                 }}
               >
